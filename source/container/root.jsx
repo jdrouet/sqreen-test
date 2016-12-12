@@ -2,9 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import lodash from 'lodash';
-import validator from 'validator';
 
-import InputSection from '../component/input-section';
+import InputSection, { validate } from '../component/input-section';
 import OutputSection from '../component/output-section';
 
 import FilterAction from '../action/filter';
@@ -21,7 +20,7 @@ class Root extends Component {
   }
 
   getEvents() {
-    if (!this.isReady()) {
+    if (!validate(this.props.filter)) {
       return [];
     }
     return lodash(this.props.stream.events)
@@ -32,13 +31,6 @@ class Root extends Component {
       .filter(item => item.createdAt.getTime() > this.props.filter.fromDate.getTime())
       .filter(item => item.createdAt.getTime() < this.props.filter.toDate.getTime())
       .value();
-  }
-
-  isReady() {
-    return validator.isURL(this.props.filter.url) &&
-      this.props.filter.fromDate &&
-      this.props.filter.toDate &&
-      this.props.filter.fromDate.getTime() < this.props.filter.toDate.getTime();
   }
 
   render() {

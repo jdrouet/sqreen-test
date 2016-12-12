@@ -3,9 +3,21 @@ import { Card, CardText } from 'material-ui/Card';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import validator from 'validator';
+
+const styles = {
+  card: {
+    margin: 10,
+  },
+};
+
+export const validate = filter =>
+  validator.isURL(filter.url) &&
+    filter.fromDate && filter.toDate &&
+    filter.fromDate.getTime() < filter.toDate.getTime();
 
 const InputSection = props => (
-  <Card>
+  <Card style={styles.card}>
     <CardText>
       <div className="row bottom-xs">
         <div className="col-xs-12 col-md-4">
@@ -37,6 +49,7 @@ const InputSection = props => (
         </div>
         <div className="col-xs-2 col-md-2">
           <RaisedButton
+            disabled={!validate(props.value)}
             fullWidth
             primary
             onTouchTap={props.onSearch}

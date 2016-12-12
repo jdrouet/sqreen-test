@@ -4,8 +4,14 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'mate
 
 import EventRow from './event-row';
 
+const styles = {
+  card: {
+    margin: 10,
+  },
+};
+
 const OutputSection = props => (
-  <Card>
+  <Card style={styles.card}>
     <Table height="450px">
       <TableHeader
         adjustForCheckbox={false}
