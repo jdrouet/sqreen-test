@@ -11,7 +11,8 @@ import EventRow from './event-row';
 describe('component/EventRow', () => {
   const muiTheme = getMuiTheme();
   const renderWithContext = node => render(
-    <MuiThemeProvider muiTheme={muiTheme}>{node}</MuiThemeProvider>
+    <MuiThemeProvider muiTheme={muiTheme}>{node}</MuiThemeProvider>,
+    {context: {muiTheme}},
   )[0].children[0];
 
   it('should display the informations', () => {

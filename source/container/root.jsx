@@ -9,7 +9,7 @@ import OutputSection from '../component/output-section';
 import FilterAction from '../action/filter';
 import StreamEffect from '../effect/stream';
 
-class Root extends Component {
+export class Root extends Component {
 
   onChange(value) {
     this.props.filterAction.update(value);
